@@ -1,6 +1,5 @@
 package xcache
 
-
 type linkNode struct {
 	key   string
 	value []byte

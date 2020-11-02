@@ -2,7 +2,6 @@ package xcache
 
 import (
 	"context"
-	"errors"
 )
 
 type xCache struct {
@@ -11,7 +10,7 @@ type xCache struct {
 	monitor *monitor
 }
 
-func NewXCache(cap int, of ...optionF) *xCache {
+func NewXCache(cap int, of ...OptionF) *xCache {
 	if cap <= 0 {
 		return nil
 	}
@@ -62,12 +61,12 @@ func (x *xCache) RemovePrisoner(gs ...getter) {
 	x.monitor.del(gs...)
 }
 
-func (x *xCache) ResetMonitor(gap int) error {
+func (x *xCache) ResetMonitor(gap int) bool {
 	if gap <= 0 {
-		return errors.New("invalid gap")
+		return false
 	}
 	x.monitor.resetGap(gap)
-	return nil
+	return true
 }
 
 func (x *xCache) startMonitor() {

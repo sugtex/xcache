@@ -1,6 +1,6 @@
 package xcache
 
-type optionF func(*option)
+type OptionF func(*option)
 
 type option struct {
 	isOpenMonitor bool // 是否打开监管
@@ -8,7 +8,7 @@ type option struct {
 }
 
 // 开启监管者,定时间隔gap
-func WithOpenMonitor(gap int) optionF {
+func WithOpenMonitor(gap int) OptionF {
 	return func(opt *option) {
 		opt.isOpenMonitor = true
 		opt.monitorGap = gap
